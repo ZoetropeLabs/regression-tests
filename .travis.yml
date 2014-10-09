@@ -5,7 +5,7 @@ node_js:
 addons:
   sauce_connect:
     username: "rfwebb"
-    secure: "FLf1MlDc8fd7ZDytBtKWKDDvmQqMqHS2KGzcAgnCe/k5RFkQVq40MSTDQ70K+btl/cU8KLaJQ2+uUQQQDu/XJt1lVo6Y2anCgLHT2nuEr2pUhGLrUjlO+ryhs6cbvgR2dhwc878/zad0HWf6G5g/icyFhTq0UM5mhHFGw4Z/Xs8="
+    secure: "KWyj/JW4wUEL3NXOVX0lBbPQ1EyJXGAHWhvj3VpdOZ/V81G7ZWTKD+etyPbNyxp1liapZ04sLU9p3cFpdPoP8R7U2jShalwVgBnphqbddK37xri5WhOtTcxnHWVEwY3psqhzUIRgs/5p+G5sTrsCOCfsHFKzz+6ZHLTHikHQxHI="
 
 install:
     - npm install
