@@ -4,7 +4,7 @@ node_js:
 
 addons:
   sauce_connect:
-    username: "rfwebb"
+    username: "zoetrope"
     secure: "KWyj/JW4wUEL3NXOVX0lBbPQ1EyJXGAHWhvj3VpdOZ/V81G7ZWTKD+etyPbNyxp1liapZ04sLU9p3cFpdPoP8R7U2jShalwVgBnphqbddK37xri5WhOtTcxnHWVEwY3psqhzUIRgs/5p+G5sTrsCOCfsHFKzz+6ZHLTHikHQxHI="
 
 install:
