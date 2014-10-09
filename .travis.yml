@@ -13,12 +13,16 @@ install:
     - sudo apt-get install -y graphicsmagick
     - git clone https://github.com/ZoetropeImaging/zoetrope-jquery
 
-script:
+before_script:
     - cd zoetrope-jquery
     - npm install
     - gulp
     - cd ..
-    - http-server -p 8888 zoetrope-jquery/dist  # start a Web server
+    - "export DISPLAY=:99.0" 
+    - "sh -e /etc/init.d/xvfb start"
+    - http-server -p 8888 zoetrope-jquery/dist & # start a Web server
     - sleep 3 # give Web server some time to bind to sockets, etc
+
+script:
     - cd tests
     - protractor testSuite.conf.js
