@@ -1,0 +1,22 @@
+{
+  "name": "ZoetropeRegression",
+  "version": "1.0.0",
+  "devDependencies": {
+    "easyimage": "^1.0.3",
+    "execSync": "~1.0.1-pre",
+    "gm": "^1.14.2",
+    "http": "0.0.0",
+	"http-server" : "",
+    "http-get": "^0.5.10",
+    "images": "^2.0.0",
+    "jasmine-node": "^1.14.3",
+    "protractor": "^0.22.0",
+    "q": "~1.0.1",
+    "selenium-webdriver": "^2.41.0",
+    "webdriverjs": "",
+    "winston": "^0.7.3"
+  },
+  "scripts": {
+    "preinstall": "npm i -g protractor"
+  }
+}

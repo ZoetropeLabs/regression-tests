@@ -1,0 +1,24 @@
+language: node_js
+node_js:
+    - "0.10"
+
+addons:
+  sauce_connect:
+    username: "rfwebb"
+    secure: "FLf1MlDc8fd7ZDytBtKWKDDvmQqMqHS2KGzcAgnCe/k5RFkQVq40MSTDQ70K+btl/cU8KLaJQ2+uUQQQDu/XJt1lVo6Y2anCgLHT2nuEr2pUhGLrUjlO+ryhs6cbvgR2dhwc878/zad0HWf6G5g/icyFhTq0UM5mhHFGw4Z/Xs8="
+
+install:
+    - npm install
+    - sudo apt-get update -qq
+    - sudo apt-get install -y graphicsmagick
+    - git clone https://github.com/ZoetropeImaging/zoetrope-jquery
+
+script:
+    - cd zoetrope-jquery
+    - npm install
+    - gulp
+    - cd ..
+    - http-server -p 8888 zoetrope-jquery/dist  # start a Web server
+    - sleep 3 # give Web server some time to bind to sockets, etc
+    - cd tests
+    - protractor testSuite.conf.js
