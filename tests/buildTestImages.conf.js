@@ -40,9 +40,8 @@ exports.config = {
     // The tests will be run remotely using SauceLabs.
     //sauceUser: 'bitdivision',
     //sauceKey: 'ac869e30-7936-4975-bf26-0b52a766a3e1',
-    
-    sauceUser: 'rfwebb',
-    sauceKey: '9d28f6a2-cca5-4ce2-aa2c-a86e139f6c8d',
+    sauceUser: process.env.SAUCE_USERNAME,
+	sauceKey: process.env.SAUCE_ACCESS_KEY,
     // The address of a running selenium server. If specified, Protractor will
     // connect to an already running instance of selenium. This usually looks like
     // seleniumAddress: 'http://localhost:4444/wd/hub'
@@ -81,7 +80,6 @@ exports.config = {
     // tests, use multiCapabilities, which takes an array of capabilities.
     // If this is specified, capabilities will be ignored.
     multiCapabilities: [
-
     {
         browserName: 'internet explorer',
         platform: 'Windows 7',

@@ -38,11 +38,9 @@ exports.config = {
 
     // If sauceUser and sauceKey are specified, seleniumServerJar will be ignored.
     // The tests will be run remotely using SauceLabs.
-    //sauceUser: 'bitdivision',
-    //sauceKey: 'ac869e30-7936-4975-bf26-0b52a766a3e1',
     
-    sauceUser: 'rfwebb',
-    sauceKey: '9d28f6a2-cca5-4ce2-aa2c-a86e139f6c8d',
+    sauceUser: process.env.SAUCE_USERNAME,
+	sauceKey: process.env.SAUCE_ACCESS_KEY,
     // The address of a running selenium server. If specified, Protractor will
     // connect to an already running instance of selenium. This usually looks like
     // seleniumAddress: 'http://localhost:4444/wd/hub'
@@ -87,6 +85,7 @@ exports.config = {
         platform: 'Windows 7',
         version: '11',
         'screen-resolution': '1920x1200',
+		'tunnel-identifier' : process.env[TRAVIS_JOB_NUMBER],
     },
     
     {
@@ -94,12 +93,14 @@ exports.config = {
         platform: 'Windows 7',
         version: "27",
         'screen-resolution': '1920x1200',
+		'tunnel-identifier' : process.env[TRAVIS_JOB_NUMBER],
     },
     {   //WORKING!
         browserName: 'chrome',
         platform: 'Windows 7',
         version: "30",
         'screen-resolution': '1920x1200',
+		'tunnel-identifier' : process.env[TRAVIS_JOB_NUMBER],
 
     },
     {
@@ -107,6 +108,7 @@ exports.config = {
         platform: 'OS X 10.8',
         version: "6",
         'screen-resolution': '1920x1200',
+		'tunnel-identifier' : process.env[TRAVIS_JOB_NUMBER],
     },
 	
 	{
@@ -115,12 +117,14 @@ exports.config = {
         version: '6.1',
         'device-orientation': 'landscape',
         'screen-resolution': '1920x1200',
+		'tunnel-identifier' : process.env[TRAVIS_JOB_NUMBER],
     },
     {
         browserName: 'ipad',
         platform: 'OS X 10.8',
         version: '6.1',
         'screen-resolution': '1920x1200',
+		'tunnel-identifier' : process.env[TRAVIS_JOB_NUMBER],
     },
     {
         browserName: 'android',
@@ -128,6 +132,7 @@ exports.config = {
         version: '4.3',
         deviceName: 'LG Nexus 4 Emulator',
         'idle-timeout': 200,
+		'tunnel-identifier' : process.env[TRAVIS_JOB_NUMBER],
     },
 
     ],
@@ -136,7 +141,7 @@ exports.config = {
     //
     // A base URL for your application under test. Calls to protractor.get()
     // with relative paths will be prepended with this.
-    baseUrl: 'http://jenkins.zoetrope.io:' + (process.env.HTTP_PORT || '8888'),
+    baseUrl: 'localhost:8888',
 
     // Selector for the element housing the angular app - this defaults to
     // body, but is necessary if ng-app is on a descendant of <body>  
