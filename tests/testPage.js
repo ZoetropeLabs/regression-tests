@@ -56,7 +56,7 @@ var testPage =  function () {
 		loadSpinTimeout: 7000,
 		androidLoadTimeout : 20000,
 		loadTimeout : 3000,
-		pageLoadTimeout : 10000,
+		pageLoadTimeout : 20000,
 		opacityTimeout : 1000,
 		closeTimeout : 1000,
 		zoomOutTimeout : 1000,
@@ -193,7 +193,6 @@ var testPage =  function () {
 				return !elem.isDisplayed();
 			};
 		}, that.settings.pageLoadTimeout);
-
 
 	};
 
