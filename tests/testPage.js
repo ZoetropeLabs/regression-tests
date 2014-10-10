@@ -54,9 +54,9 @@ var testPage =  function () {
 			'inline' : 'http://localhost:8888/v3/testInline.html'
 		},
 		loadSpinTimeout: 7000,
-		androidLoadTimeout : 20000,
-		loadTimeout : 3000,
-		pageLoadTimeout : 20000,
+		androidLoadTimeout : 60000,
+		loadTimeout : 20000,
+		pageLoadTimeout : 60000,
 		opacityTimeout : 1000,
 		closeTimeout : 1000,
 		zoomOutTimeout : 1000,
