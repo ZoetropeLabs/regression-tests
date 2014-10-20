@@ -83,7 +83,7 @@ describe('Desktop Browser Testing', function() {
 	
 	it ('Should match the open widget image', function() {
 		testPage.openWidget().then(function() {
-			browser.sleep(1000);
+			browser.sleep(10000);
 			expect(testPage.comparePageImages('openWidget')).toBeLessThan(imageComparisonThreshold);
 		});
 		
