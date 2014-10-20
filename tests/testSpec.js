@@ -33,7 +33,7 @@ describe('Desktop Browser Testing', function() {
     it("Should match saved loaded page image", function() {
 			testPage.navigate('inline').then(function() {
 				//Wait a tiny bit for the loading image to fade
-				browser.sleep(2000);
+				browser.sleep(10000);
 				expect(testPage.comparePageImages('load')).toBeLessThan(imageComparisonThreshold);
 			});
     });
@@ -76,7 +76,7 @@ describe('Desktop Browser Testing', function() {
 	it("Should match saved loaded page image", function() {
 			testPage.navigate('popover').then(function() {
 				//Wait a tiny bit for the loading image to fade
-				browser.sleep(2000);
+				browser.sleep(10000);
 				expect(testPage.comparePageImages('load')).toBeLessThan(imageComparisonThreshold);
 			});
     });
