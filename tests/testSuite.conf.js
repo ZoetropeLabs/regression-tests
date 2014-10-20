@@ -86,6 +86,7 @@ exports.config = {
         version: '11',
         'screen-resolution': '1920x1200',
 		'tunnel-identifier' : process.env['TRAVIS_JOB_NUMBER'],
+		'name' : 'IE11 Win7',
     },
     
     {
@@ -94,6 +95,7 @@ exports.config = {
         version: "27",
         'screen-resolution': '1920x1200',
 		'tunnel-identifier' : process.env['TRAVIS_JOB_NUMBER'],
+		'name' : 'Firefox Win7',
     },
     {   //WORKING!
         browserName: 'chrome',
@@ -101,6 +103,7 @@ exports.config = {
         version: "30",
         'screen-resolution': '1920x1200',
 		'tunnel-identifier' : process.env['TRAVIS_JOB_NUMBER'],
+		'name' : 'Chrome Win7',
 
     },
     {
@@ -109,6 +112,7 @@ exports.config = {
         version: "6",
         'screen-resolution': '1920x1200',
 		'tunnel-identifier' : process.env['TRAVIS_JOB_NUMBER'],
+		'name' : 'Safari OSx10.8',
     },
 	
 	{
@@ -118,6 +122,7 @@ exports.config = {
         'device-orientation': 'landscape',
         'screen-resolution': '1920x1200',
 		'tunnel-identifier' : process.env['TRAVIS_JOB_NUMBER'],
+		'name' : 'iphone6.1',
     },
     {
         browserName: 'ipad',
@@ -125,6 +130,7 @@ exports.config = {
         version: '6.1',
         'screen-resolution': '1920x1200',
 		'tunnel-identifier' : process.env['TRAVIS_JOB_NUMBER'],
+		'name' : 'ipad6.1',
     },
     {
         browserName: 'android',
@@ -133,6 +139,7 @@ exports.config = {
         deviceName: 'LG Nexus 4 Emulator',
         'idle-timeout': 200,
 		'tunnel-identifier' : process.env['TRAVIS_JOB_NUMBER'],
+		'name' : 'Android4.3',
     },
 
     ],
