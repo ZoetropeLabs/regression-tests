@@ -294,10 +294,11 @@ var testPage =  function () {
 
 		browser.takeScreenshot().then(function(data) {
 			var stream = fs.createWriteStream(path);
-			stream.write(new Buffer(data, 'base64'));
-			stream.end();
-			winston.log('info', 'Saved screenshot');
-			defer.fulfill();
+			stream.write(new Buffer(data, 'base64'), function() {
+				stream.end();
+				winston.log('info', 'Saved screenshot');
+				defer.fulfill();
+			});
 
 		});
 		return defer.promise;
