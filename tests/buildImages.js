@@ -29,7 +29,7 @@ describe ('Build Screenshot Images', function() {
 		testPage.clickZoom();
         browser.driver.wait(function() {
             return testPage.zoomElement.isDisplayed();
-        }, 1000);
+        }, 3000);
 		expect(testPage.savePageScreenshot('zoom')).toBe();
 
 	});
@@ -76,7 +76,7 @@ describe ('Build Screenshot Images', function() {
 		testPage.clickZoom();
         browser.driver.wait(function() {
             return testPage.zoomElement.isDisplayed();
-        }, 1000);
+        }, 3000);
 		expect(testPage.savePageScreenshot('zoom')).toBe();
 
 	});
