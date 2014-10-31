@@ -8,7 +8,7 @@ describe ('Build Screenshot Images', function() {
 
 	it('Should save image from loaded page', function() {
 		testPage.navigate('inline').then(function() {
-			browser.sleep(200);
+			browser.sleep(2000);
 			expect(testPage.savePageScreenshot('load')).toBe();
 		});
 	});
@@ -47,14 +47,14 @@ describe ('Build Screenshot Images', function() {
 	
 	it('Should save image from loaded page', function() {
 		testPage.navigate('popover').then(function() {
-			browser.sleep(200);
+			browser.sleep(2000);
 			expect(testPage.savePageScreenshot('load')).toBe();
 		});
 	});
 
 	it ('Should open widget and save screenshot', function() {
 		testPage.openWidget().then(function() {
-			browser.sleep(200);
+			browser.sleep(2000);
 			expect(testPage.savePageScreenshot('openWidget')).toBe();
 		});
 		
@@ -76,7 +76,7 @@ describe ('Build Screenshot Images', function() {
 		testPage.clickZoom();
         browser.driver.wait(function() {
             return testPage.zoomElement.isDisplayed();
-        }, 3000);
+        }, 4000);
 		expect(testPage.savePageScreenshot('zoom')).toBe();
 
 	});
