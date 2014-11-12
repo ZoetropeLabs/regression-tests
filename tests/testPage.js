@@ -12,6 +12,8 @@ var testPage =  function () {
 
 	var ptor = protractor.getInstance();
 
+	var branch = process.env.TRAVIS_BRANCH;
+
 
 	this.elements = {
 		progressWrapper : '.zoe-progress-wrapper',
@@ -50,8 +52,8 @@ var testPage =  function () {
 	this.settings= {
 		//The test page URL
 		pageURL : {
-			'popover' : 'http://localhost:8888/v3/testPopover.html',
-			'inline' : 'http://localhost:8888/v3/testInline.html'
+			'popover' : 'http://localhost:8888/' + branch + '/testPopover.html',
+			'inline' : 'http://localhost:8888/' + branch + '/testInline.html'
 		},
 		loadSpinTimeout: 7000,
 		androidLoadTimeout : 60000,

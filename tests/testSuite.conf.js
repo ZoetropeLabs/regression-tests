@@ -132,7 +132,7 @@ exports.config = {
 		'tunnel-identifier' : process.env['TRAVIS_JOB_NUMBER'],
 		'name' : 'ipad6.1',
     },
-    {
+   /* {
         browserName: 'android',
         platform: 'Linux',
         version: '4.3',
@@ -140,7 +140,7 @@ exports.config = {
         'idle-timeout': 200,
 		'tunnel-identifier' : process.env['TRAVIS_JOB_NUMBER'],
 		'name' : 'Android4.3',
-    },
+    },*/
 
     ],
 
