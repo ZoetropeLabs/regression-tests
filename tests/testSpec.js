@@ -25,7 +25,6 @@ describe('Desktop Browser Testing', function() {
 				//TODO: Add this back in
                 //expect(realErrors.length).toEqual(0);
             });
-        }
     });
 
 	
