@@ -80,11 +80,12 @@ exports.config = {
     // tests, use multiCapabilities, which takes an array of capabilities.
     // If this is specified, capabilities will be ignored.
     multiCapabilities: [
-    {
+	{
         browserName: 'internet explorer',
         platform: 'Windows 7',
         version: '11',
         'screen-resolution': '1920x1200',
+		'name' : 'IE 11 Win 7 Build Screenshots',
     },
     
     {
@@ -92,12 +93,14 @@ exports.config = {
         platform: 'Windows 7',
         version: "27",
         'screen-resolution': '1920x1200',
+		'name' : 'Firefox 27 Build Screenshots',
     },
     {   //WORKING!
         browserName: 'chrome',
         platform: 'Windows 7',
         version: "30",
         'screen-resolution': '1920x1200',
+		'name' : 'Chrome 30 Build Screenshots',
 
     },
     {
@@ -105,6 +108,7 @@ exports.config = {
         platform: 'OS X 10.8',
         version: "6",
         'screen-resolution': '1920x1200',
+		'name' : 'Safari 6 Build Screenshots',
     },
 	
 	{
@@ -113,20 +117,23 @@ exports.config = {
         version: '6.1',
         'device-orientation': 'landscape',
         'screen-resolution': '1920x1200',
+		'name' : 'iphone 6.1 Build Screenshots',
     },
     {
         browserName: 'ipad',
         platform: 'OS X 10.8',
         version: '6.1',
         'screen-resolution': '1920x1200',
-    },
+		'name' : 'iPad 6.1 Build Screenshots',
+    },/*
     {
         browserName: 'android',
         platform: 'Linux',
         version: '4.3',
         deviceName: 'LG Nexus 4 Emulator',
+		'name' : 'Nexus 4 Android 4.3 Build Screenshots',
         'idle-timeout': 200,
-    },
+    },*/
 
     ],
 
