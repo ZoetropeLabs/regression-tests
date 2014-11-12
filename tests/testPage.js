@@ -52,14 +52,14 @@ var testPage =  function () {
 	this.settings= {
 		//The test page URL
 		pageURL : {
-			'popover' : 'http://localhost:8888/' + branch + '/testPopover.html',
-			'inline' : 'http://localhost:8888/' + branch + '/testInline.html'
+			'popover' : 'http://localhost:8888/'+ process.env.TRAVIS_BRANCH + '/testPopover.html',
+			'inline' : 'http://localhost:8888/' + process.env.TRAVIS_BRANCH + '/testInline.html'
 		},
 		loadSpinTimeout: 7000,
 		androidLoadTimeout : 60000,
 		loadTimeout : 20000,
 		pageLoadTimeout : 60000,
-		opacityTimeout : 1000,
+		opacityTimeout : 5000,
 		closeTimeout : 1000,
 		zoomOutTimeout : 1000,
 		dragTimeout : 2000,
@@ -221,7 +221,7 @@ var testPage =  function () {
 
 			winston.log('info', 'Got help style of ' + style);
 			
-			if (style.indexOf('opacity')==-1) 
+			if ((style.indexOf('opacity')==-1)) 
 				opacity = true;
 			else
 				opacity = false;

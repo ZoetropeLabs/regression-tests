@@ -38,8 +38,6 @@ exports.config = {
 
     // If sauceUser and sauceKey are specified, seleniumServerJar will be ignored.
     // The tests will be run remotely using SauceLabs.
-    //sauceUser: 'bitdivision',
-    //sauceKey: 'ac869e30-7936-4975-bf26-0b52a766a3e1',
     sauceUser: process.env.SAUCE_USERNAME,
 	sauceKey: process.env.SAUCE_ACCESS_KEY,
     // The address of a running selenium server. If specified, Protractor will
