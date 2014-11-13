@@ -120,7 +120,6 @@ exports.config = {
         platform: 'OS X 10.8',
         version: '6.1',
         'device-orientation': 'landscape',
-        'screen-resolution': '1920x1200',
 		'tunnel-identifier' : process.env['TRAVIS_JOB_NUMBER'],
 		'name' : 'iphone6.1',
     },
@@ -128,7 +127,6 @@ exports.config = {
         browserName: 'ipad',
         platform: 'OS X 10.8',
         version: '6.1',
-        'screen-resolution': '1920x1200',
 		'tunnel-identifier' : process.env['TRAVIS_JOB_NUMBER'],
 		'name' : 'ipad6.1',
     },
@@ -141,6 +139,7 @@ exports.config = {
 		'tunnel-identifier' : process.env['TRAVIS_JOB_NUMBER'],
 		'name' : 'Android4.3',
     },*/
+
 
     ],
 
