@@ -10,6 +10,7 @@ describe('Desktop Browser Testing', function() {
 
 
     afterEach(function() {
+		if (!testPage.isIE) {
             var realErrors = [];
             browser.manage().logs().get('browser').then(function(browserLog) {
                 if (browserLog.length !== 0) {
@@ -25,9 +26,11 @@ describe('Desktop Browser Testing', function() {
 				//TODO: Add this back in
                 //expect(realErrors.length).toEqual(0);
             });
+		}
     });
 
-	
+
+
     it("Should match saved loaded page image", function() {
 			testPage.navigate('inline').then(function() {
 				//Wait a tiny bit for the loading image to fade
