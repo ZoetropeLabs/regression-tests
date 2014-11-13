@@ -9,7 +9,7 @@ describe('Desktop Browser Testing', function() {
     protractor.getInstance();
 
 
-    afterEach(function() {
+    /*afterEach(function() {
 		if (!testPage.isIE) {
             var realErrors = [];
             browser.manage().logs().get('browser').then(function(browserLog) {
@@ -27,7 +27,7 @@ describe('Desktop Browser Testing', function() {
                 //expect(realErrors.length).toEqual(0);
             });
 		}
-    });
+    });*/
 
 
 
