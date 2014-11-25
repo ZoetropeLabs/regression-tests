@@ -10,7 +10,7 @@ var protractor = require('protractor');
 var testPage =  function () {
 
 
-	var ptor = protractor.getInstance();
+	this.ptor = protractor.getInstance();
 
 	var branch = process.env.TRAVIS_BRANCH;
 
@@ -153,20 +153,36 @@ var testPage =  function () {
 				that.isFirefox = true;
 			}
 			else that.isFirefox = false;
+			
 
-
-			winston.log('info', currentCapabilities.caps_);
-			winston.log('info', that.deviceOrientation);
 
 			that.currentCapabilities = currentCapabilities;
 			that.browser = currentCapabilities.caps_.browserName;
 			that.browserVersion = currentCapabilities.caps_.version;
+			
+			//iPhone sometimes doesn't report version 
+			if (!that.browser) {
+				console.log("browser undefined");
+				that.browser = currentCapabilities.caps_.desired.platformName;
+			}
+			if (!that.browserVersion) {
+				console.log("browser version undefined");
+				that.browserVersion = currentCapabilities.caps_.desired.platformVersion;
+				that.browser = currentCapabilities.caps_.desired.platformName;
+			}
+			
+			winston.log('info', currentCapabilities.caps_);
+			winston.log('info', that.deviceOrientation);
+			winston.log('info', currentCapabilities);
+			console.log(currentCapabilities);
+			console.log(currentCapabilities.caps_);
+
 			that.sessionID = currentCapabilities.caps_["webdriver.remote.sessionid"];
 			//Append browser and version to every filepath
 			for (var key in that.filePaths) {
 				winston.log("info", "Initialising file paths with browser & version");
 				if (that.filePaths[key].charAt(0) == '/') {
-					that.filePaths[key] = that.filePaths[key] + that.browser + that.browserVersion + that.sessionID+'.png';
+					that.filePaths[key] = that.filePaths[key] + that.browser + that.browserVersion + '.png';
 				}
 			}
 
@@ -180,17 +196,43 @@ var testPage =  function () {
 
 	}();
 
+	this.getDeviceOrientation = function(type) {
+		that.isWidgetInline = type;
+			browser.executeScript('return { ' +
+		'width: (window.innerWidth || document.documentElement.clientWidth || document.body.offsetWidth), ' +
+		'height: (window.innerHeight || document.documentElement.clientHeight || document.body.offsetHeight)' +
+		'};')
+		.then(function(size, type) {
+			if (size.width > size.height) {
+				that.deviceOrientation = 'landscape';
+				console.log("orientation landscape");
+			}
+			else {
+				that.deviceOrientation = 'portrait';
+				console.log("orientation portrait");
+			}
+
+			that.setPageMode(that.isWidgetInline);
+		});
+
+	};
+
 	this.navigate = function(type) {
 		winston.log('info', 'Opening URL: ' + that.settings.pageURL[type]);
 		
-		that.setPageMode(type);
+		that.getDeviceOrientation(type);
+
 
 		browser.get(that.settings.pageURL[type]);
+		
+
 		//Wait for page to finish loading
 		//Check the progress wrapper and wait for display: none
 		return browser.wait(function() {
 			elem = element(by.css(that.elements.progressWrapper));
 			return function() {
+
+
 				//Nasty but has to be done since we're using not displayed
 				return !elem.isDisplayed();
 			};
@@ -257,11 +299,10 @@ var testPage =  function () {
 	};
 
 	this.setPageMode = function(widgetType) {
-		that.isWidgetInline = widgetType;
 		//Append browser and version to every filepath
 		for (var key in that.testImagePaths) {
 			winston.log("info", "Initialising file paths with browser & version");
-			that.testImages[key] = that.testImagePaths[key] + that.isWidgetInline + '-' + that.browser + '-' + that.browserVersion+ '.png';
+			that.testImages[key] = that.testImagePaths[key] + that.isWidgetInline + '-' + that.browser + '-' + that.browserVersion+  '-' + that.deviceOrientation + '.png';
 		}
 
 	};

@@ -114,31 +114,46 @@ exports.config = {
 		'tunnel-identifier' : process.env['TRAVIS_JOB_NUMBER'],
 		'name' : 'Safari OSx10.8',
     },
-	
 	{
         browserName: 'iphone',
         platform: 'OS X 10.8',
-        version: '6.1',
+        version: '7.0',
         'device-orientation': 'landscape',
-		'tunnel-identifier' : process.env['TRAVIS_JOB_NUMBER'],
-		'name' : 'iphone6.1',
+        'screen-resolution': '1024x768',
+		'name' : 'iphone 7.0 Landscape Build Screenshots',
+    },
+	{
+        browserName: 'iphone',
+        platform: 'OS X 10.8',
+        version: '7.0',
+        'screen-resolution': '1024x768',
+		'name' : 'iphone 7.0 Build Screenshots',
+    },
+	{
+        browserName: 'iphone',
+        platform: 'OS X 10.8',
+        version: '8.1',
+        'screen-resolution': '1024x768',
+		'name' : 'iphone 8.1 Build Screenshots',
     },
     {
         browserName: 'ipad',
         platform: 'OS X 10.8',
-        version: '6.1',
-		'tunnel-identifier' : process.env['TRAVIS_JOB_NUMBER'],
-		'name' : 'ipad6.1',
-    },
-   /* {
+        version: '7.1',
+        'screen-resolution': '1024x768',
+		'name' : 'iPad 7.1 Build Screenshots',
+    },/*
+    {
         browserName: 'android',
         platform: 'Linux',
         version: '4.3',
         deviceName: 'LG Nexus 4 Emulator',
+		'name' : 'Nexus 4 Android 4.3 Build Screenshots',
         'idle-timeout': 200,
-		'tunnel-identifier' : process.env['TRAVIS_JOB_NUMBER'],
-		'name' : 'Android4.3',
     },*/
+
+
+	
 
 
     ],

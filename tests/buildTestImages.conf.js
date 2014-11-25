@@ -112,17 +112,31 @@ exports.config = {
 	{
         browserName: 'iphone',
         platform: 'OS X 10.8',
-        version: '6.1',
+        version: '7.0',
         'device-orientation': 'landscape',
-        'screen-resolution': '1920x1200',
-		'name' : 'iphone 6.1 Build Screenshots',
+        'screen-resolution': '1024x768',
+		'name' : 'iphone 7.0 Landscape Build Screenshots',
+    },
+	{
+        browserName: 'iphone',
+        platform: 'OS X 10.8',
+        version: '7.0',
+        'screen-resolution': '1024x768',
+		'name' : 'iphone 7.0 Build Screenshots',
+    },
+	{
+        browserName: 'iphone',
+        platform: 'OS X 10.8',
+        version: '8.1',
+        'screen-resolution': '1024x768',
+		'name' : 'iphone 8.1 Build Screenshots',
     },
     {
         browserName: 'ipad',
         platform: 'OS X 10.8',
-        version: '6.1',
-        'screen-resolution': '1920x1200',
-		'name' : 'iPad 6.1 Build Screenshots',
+        version: '7.1',
+        'screen-resolution': '1024x768',
+		'name' : 'iPad 7.1 Build Screenshots',
     },/*
     {
         browserName: 'android',
