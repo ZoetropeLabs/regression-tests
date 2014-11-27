@@ -29,14 +29,18 @@ describe('Desktop Browser Testing', function() {
 		}
     });*/
 
+	it('Should wait for the original page to load', function() {
+		expect(browser.sleep(10000)).toBe();
+	});
 
 
-    it("Should match saved loaded page image", function() {
-			testPage.navigate('inline').then(function() {
-				//Wait a tiny bit for the loading image to fade
+	it('Should save image from loaded page', function() {
+		testPage.navigate('inline').then(function() {
+			testPage.getDeviceOrientation().then(function() {
 				browser.sleep(15000);
 				expect(testPage.comparePageImages('load')).toBeLessThan(imageComparisonThreshold);
 			});
+		});
     });
 
 	it('should match saved help image', function() {
@@ -75,11 +79,13 @@ describe('Desktop Browser Testing', function() {
 
 
 	it("Should match saved loaded page image", function() {
-			testPage.navigate('popover').then(function() {
+		testPage.navigate('popover').then(function() {
+			testPage.getDeviceOrientation().then(function() {
 				//Wait a tiny bit for the loading image to fade
 				browser.sleep(10000);
 				expect(testPage.comparePageImages('load')).toBeLessThan(imageComparisonThreshold);
 			});
+		});
     });
 	
 	it ('Should match the open widget image', function() {

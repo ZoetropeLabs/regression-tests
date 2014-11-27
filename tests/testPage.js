@@ -52,8 +52,8 @@ var testPage =  function () {
 	this.settings= {
 		//The test page URL
 		pageURL : {
-			'popover' : 'http://localhost:8888/'+ process.env.TRAVIS_BRANCH + '/testPopover.html',
-			'inline' : 'http://localhost:8888/' + process.env.TRAVIS_BRANCH + '/testInline.html'
+			'popover' : 'http://localtesting:8888/'+ process.env.TRAVIS_BRANCH + '/testPopover.html',
+			'inline' : 'http://localtesting:8888/' + process.env.TRAVIS_BRANCH + '/testInline.html'
 		},
 		loadSpinTimeout: 7000,
 		androidLoadTimeout : 60000,
@@ -167,8 +167,15 @@ var testPage =  function () {
 			}
 			if (!that.browserVersion) {
 				console.log("browser version undefined");
-				that.browserVersion = currentCapabilities.caps_.desired.platformVersion;
-				that.browser = currentCapabilities.caps_.desired.platformName;
+				if (currentCapabilities.caps_.hasOwnProperty('desired')) {
+					that.browserVersion = currentCapabilities.caps_.desired.platformVersion;
+					that.browser = currentCapabilities.caps_.desired.platformName;
+				}
+				else if (currentCapabilities.caps_.hasOwnProperty('platformVersion')) {
+					that.browserVersion = currentCapabilities.caps_.platformVersion;
+				}
+
+				
 			}
 			
 			winston.log('info', currentCapabilities.caps_);
@@ -196,9 +203,13 @@ var testPage =  function () {
 
 	}();
 
-	this.getDeviceOrientation = function(type) {
-		that.isWidgetInline = type;
-			browser.executeScript('return { ' +
+	this.getDeviceOrientation = function() {
+		
+		var defer = new protractor.promise.Deferred();
+
+		browser.sleep(2000);
+
+		browser.executeScript('return { ' +
 		'width: (window.innerWidth || document.documentElement.clientWidth || document.body.offsetWidth), ' +
 		'height: (window.innerHeight || document.documentElement.clientHeight || document.body.offsetHeight)' +
 		'};')
@@ -213,30 +224,61 @@ var testPage =  function () {
 			}
 
 			that.setPageMode(that.isWidgetInline);
+			defer.fulfill();
 		});
+
+		return defer.promise;
 
 	};
 
 	this.navigate = function(type) {
 		winston.log('info', 'Opening URL: ' + that.settings.pageURL[type]);
 		
-		that.getDeviceOrientation(type);
+		that.isWidgetInline = type;
+
+		var outerDefer = new protractor.promise.Deferred();
 
 
-		browser.get(that.settings.pageURL[type]);
+
+			browser.get(that.settings.pageURL[type]);
+			
+			if (type == 'popover') {
+				browser.wait(function() {
+					var deferred = new protractor.promise.Deferred();
+					element(by.css(that.elements.triggerCTA)).isPresent()
+					.then(function (isPresent) {
+						outerDefer.fulfill();
+						deferred.fulfill(isPresent);
+					});
+					return deferred.promise;
+				}, that.settings.pageLoadTimeout);
+			}
+			else {
+				browser.wait(function() {
+					var deferred = new protractor.promise.Deferred();
+					element(by.css(that.elements.progressWrapper)).isPresent()
+					.then(function (isPresent) {
+						deferred.fulfill(isPresent);
+					});
+					return deferred.promise;
+				}, that.settings.pageLoadTimeout);
+				
+				browser.wait(function() {
+					var deferred = new protractor.promise.Deferred();
+					element(by.css(that.elements.progressWrapper)).isDisplayed()
+						.then(function (isDisplayed) {
+							outerDefer.fulfill();
+							deferred.fulfill(!isDisplayed);
+						});
+					return deferred.promise;
+				}, that.settings.pageLoadTimeout);
+			}
+
 		
 
-		//Wait for page to finish loading
-		//Check the progress wrapper and wait for display: none
-		return browser.wait(function() {
-			elem = element(by.css(that.elements.progressWrapper));
-			return function() {
+		return outerDefer;
+		
 
-
-				//Nasty but has to be done since we're using not displayed
-				return !elem.isDisplayed();
-			};
-		}, that.settings.pageLoadTimeout);
 
 	};
 
@@ -363,7 +405,7 @@ var testPage =  function () {
 
 		var defer = new protractor.promise.Deferred();
 
-		var tmpPath = that.filePaths.screenShot + '.' + testStage;
+		var tmpPath = that.filePaths.screenShot + '.' + testStage + '.' + this.isWidgetInline;
 
 		this.saveScreenshot(tmpPath).then(function() {
 			compareImages(tmpPath, that.testImages[testStage]).then(function(equality) {
@@ -394,6 +436,23 @@ var testPage =  function () {
 
 		return defer.promise;
 	}
+
+
+	function waitForPromiseTest(promiseFn, testFn) {
+		browser.wait(function () {
+			var deferred = protractor.promise.defer();
+			promiseFn().then(function (data) {
+				deferred.fulfill(testFn(data));
+			});
+			return deferred.promise;
+		});
+	}
+
+	/*	waitForPromiseTest(element(by.id('some-element')).isPresent,
+		function (isPresent) {
+		return !isPresent;
+		});
+		*/
 
 	
 };

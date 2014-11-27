@@ -6,10 +6,15 @@ describe ('Build Screenshot Images', function() {
 	protractor.getInstance();
 	browser.sleep(1000);
 
+	it('Should wait for the original page to load', function() {
+		expect(browser.sleep(10000)).toBe();
+	});
+
 	it('Should save image from loaded page', function() {
 		testPage.navigate('inline').then(function() {
-			browser.sleep(2000);
-			expect(testPage.savePageScreenshot('load')).toBe();
+			testPage.getDeviceOrientation().then(function() {
+				expect(testPage.savePageScreenshot('load')).toBe();
+			});
 		});
 	});
 
@@ -47,8 +52,9 @@ describe ('Build Screenshot Images', function() {
 	
 	it('Should save image from loaded page', function() {
 		testPage.navigate('popover').then(function() {
-			browser.sleep(2000);
-			expect(testPage.savePageScreenshot('load')).toBe();
+			testPage.getDeviceOrientation().then(function() {
+				expect(testPage.savePageScreenshot('load')).toBe();
+			});	
 		});
 	});
 

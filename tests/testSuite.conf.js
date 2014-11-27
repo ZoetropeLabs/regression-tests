@@ -134,7 +134,7 @@ exports.config = {
 	{
         browserName: 'iphone',
         platform: 'OS X 10.8',
-        version: '8.1',
+        version: '8.0',
         'screen-resolution': '1024x768',
 		'tunnel-identifier' : process.env['TRAVIS_JOB_NUMBER'],
 		'name' : 'iphone 8.1',
@@ -142,11 +142,11 @@ exports.config = {
     {
         browserName: 'ipad',
         platform: 'OS X 10.8',
-        version: '7.1',
+        version: '8.1',
         'screen-resolution': '1024x768',	
 		'tunnel-identifier' : process.env['TRAVIS_JOB_NUMBER'],
 		'name' : 'iPad 7.1',
-    },/*
+    },
     {
         browserName: 'android',
         platform: 'Linux',
@@ -154,7 +154,7 @@ exports.config = {
         deviceName: 'LG Nexus 4 Emulator',
 		'name' : 'Nexus 4 Android 4.3 Build Screenshots',
         'idle-timeout': 200,
-    },*/
+    },
 
 
 	
