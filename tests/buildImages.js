@@ -13,7 +13,7 @@ describe ('Build Screenshot Images', function() {
 	it('Should save image from loaded page', function() {
 		testPage.navigate('inline').then(function() {
 			testPage.getDeviceOrientation().then(function() {
-				browser.sleep(15000);
+				browser.sleep(20000);
 				expect(testPage.savePageScreenshot('load')).toBe();
 			});
 		});

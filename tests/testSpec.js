@@ -8,6 +8,8 @@ var imageComparisonThreshold = 0.001;
 describe('Desktop Browser Testing', function() {
     protractor.getInstance();
 
+	browser.sleep(1000);
+
 
     /*afterEach(function() {
 		if (!testPage.isIE) {
@@ -37,7 +39,7 @@ describe('Desktop Browser Testing', function() {
 	it('Should save image from loaded page', function() {
 		testPage.navigate('inline').then(function() {
 			testPage.getDeviceOrientation().then(function() {
-				browser.sleep(15000);
+				browser.sleep(20000);
 				expect(testPage.comparePageImages('load')).toBeLessThan(imageComparisonThreshold);
 			});
 		});

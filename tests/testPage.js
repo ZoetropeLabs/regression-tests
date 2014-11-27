@@ -209,11 +209,16 @@ var testPage =  function () {
 
 		browser.sleep(2000);
 
+		console.log("Slept");
+
 		browser.executeScript('return { ' +
 		'width: (window.innerWidth || document.documentElement.clientWidth || document.body.offsetWidth), ' +
 		'height: (window.innerHeight || document.documentElement.clientHeight || document.body.offsetHeight)' +
 		'};')
+
 		.then(function(size, type) {
+
+			console.log("Execute thened");
 			if (size.width > size.height) {
 				that.deviceOrientation = 'landscape';
 				console.log("orientation landscape");
@@ -240,46 +245,64 @@ var testPage =  function () {
 
 
 
-			browser.get(that.settings.pageURL[type]);
+		browser.get(that.settings.pageURL[type]);
+		
+		if (type == 'popover') {
+			browser.wait(function() {
+				var deferred = new protractor.promise.Deferred();
+				element(by.css(that.elements.triggerCTA)).isPresent()
+				.then(function (isPresent) {
+					outerDefer.fulfill();
+					deferred.fulfill(isPresent);
+				});
+				return deferred.promise;
+			}, that.settings.pageLoadTimeout);
+		}
+		else {
+			browser.wait(function() {
+				var deferred = new protractor.promise.Deferred();
+				element(by.css(that.elements.progressWrapper)).isPresent()
+				.then(function (isPresent) {
+					deferred.fulfill(isPresent);
+					console.log("Present fulfilled");
+				});
+				return deferred.promise;
+			}, that.settings.pageLoadTimeout);
 			
-			if (type == 'popover') {
-				browser.wait(function() {
-					var deferred = new protractor.promise.Deferred();
-					element(by.css(that.elements.triggerCTA)).isPresent()
-					.then(function (isPresent) {
-						outerDefer.fulfill();
-						deferred.fulfill(isPresent);
+			browser.wait(function() {
+				var deferred = new protractor.promise.Deferred();
+				element(by.css(that.elements.progressWrapper)).isDisplayed()
+					.then(function (isDisplayed) {
+						deferred.fulfill(!isDisplayed);
+						outerDefer.fulfill()
+						console.log("fulfilled inner defer");
 					});
-					return deferred.promise;
-				}, that.settings.pageLoadTimeout);
-			}
-			else {
-				browser.wait(function() {
-					var deferred = new protractor.promise.Deferred();
-					element(by.css(that.elements.progressWrapper)).isPresent()
-					.then(function (isPresent) {
-						deferred.fulfill(isPresent);
-					});
-					return deferred.promise;
-				}, that.settings.pageLoadTimeout);
-				
-				browser.wait(function() {
-					var deferred = new protractor.promise.Deferred();
-					element(by.css(that.elements.progressWrapper)).isDisplayed()
-						.then(function (isDisplayed) {
-							outerDefer.fulfill();
-							deferred.fulfill(!isDisplayed);
-						});
-					return deferred.promise;
-				}, that.settings.pageLoadTimeout);
-			}
+				return deferred.promise;
+			}, that.settings.pageLoadTimeout);
+			
 
+		}
 		
 
 		return outerDefer;
 		
 
 
+	};
+
+	this.scrollView = function() {
+		var defer = new protractor.promise.Deferred();
+		if ((that.isWidgetInline == 'inline')) {
+			browser.executeScript("arguments[0].scrollIntoView();", that.elementFinder.widgetWrapperSelector);
+				defer.fulfill();
+				console.log("Fulfilled with inline");
+		}
+		else {
+			browser.executeScript("arguments[0].scrollIntoView();", that.elementFinder.widgetTrigger);
+				defer.fulfill();
+				console.log("Fulfilled with popover");
+		}
+		return defer;
 	};
 
 	this.openWidget = function() {
@@ -453,6 +476,11 @@ var testPage =  function () {
 		return !isPresent;
 		});
 		*/
+
+	var scrollIntoView = function() {
+		arguments[0].scrollIntoView();
+	};
+
 
 	
 };
