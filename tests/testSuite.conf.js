@@ -147,14 +147,14 @@ exports.config = {
 		'tunnel-identifier' : process.env['TRAVIS_JOB_NUMBER'],
 		'name' : 'iPad 7.1',
     },
-    {
+    /*{
         browserName: 'android',
         platform: 'Linux',
         version: '4.3',
         deviceName: 'LG Nexus 4 Emulator',
 		'name' : 'Nexus 4 Android 4.3 Build Screenshots',
         'idle-timeout': 200,
-    },
+    },*/
 
 
 	
