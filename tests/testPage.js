@@ -52,8 +52,8 @@ var testPage =  function () {
 	this.settings= {
 		//The test page URL
 		pageURL : {
-			'popover' : 'http://localtesting:8888/'+ process.env.TRAVIS_BRANCH + '/testPopover.html',
-			'inline' : 'http://localtesting:8888/' + process.env.TRAVIS_BRANCH + '/testInline.html'
+			'popover' : 'http://localhost:8888/'+ process.env.TRAVIS_BRANCH + '/testPopover.html',
+			'inline' : 'http://localhost:8888/' + process.env.TRAVIS_BRANCH + '/testInline.html'
 		},
 		loadSpinTimeout: 7000,
 		androidLoadTimeout : 60000,
