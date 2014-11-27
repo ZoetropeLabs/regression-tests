@@ -123,14 +123,14 @@ exports.config = {
 		'tunnel-identifier' : process.env['TRAVIS_JOB_NUMBER'],
 		'name' : 'iphone 7.0 Landscape',
     },
-	{
+/*	{
         browserName: 'iphone',
         platform: 'OS X 10.8',
         version: '7.0',
         'screen-resolution': '1024x768',
 		'tunnel-identifier' : process.env['TRAVIS_JOB_NUMBER'],
 		'name' : 'iphone 7.0',
-    },
+    },*/
 	{
         browserName: 'iphone',
         platform: 'OS X 10.8',
