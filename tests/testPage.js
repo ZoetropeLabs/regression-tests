@@ -91,6 +91,7 @@ var testPage =  function () {
 	};
 
 
+
 	var that = this;
 
 
@@ -130,9 +131,10 @@ var testPage =  function () {
 	this.isFirefox = true;
 	this.sessionID = '';
 	this.instanceString = '';
+	this.originalBrowser = '';
 
 	this.isWidgetInline = 'inline';
-
+	this.isIOS = false;
 
 
 	var __construct = function() {
@@ -161,15 +163,18 @@ var testPage =  function () {
 			that.browserVersion = currentCapabilities.caps_.version;
 			
 			//iPhone sometimes doesn't report version 
+			that.originalBrowser = that.browser;
 			if (!that.browser) {
 				console.log("browser undefined");
 				that.browser = currentCapabilities.caps_.desired.platformName;
+				that.isIOS = true;
 			}
 			if (!that.browserVersion) {
 				console.log("browser version undefined");
 				if (currentCapabilities.caps_.hasOwnProperty('desired')) {
 					that.browserVersion = currentCapabilities.caps_.desired.platformVersion;
 					that.browser = currentCapabilities.caps_.desired.platformName;
+					that.isIOS = true;
 				}
 				else if (currentCapabilities.caps_.hasOwnProperty('platformVersion')) {
 					that.browserVersion = currentCapabilities.caps_.platformVersion;
@@ -177,6 +182,8 @@ var testPage =  function () {
 
 				
 			}
+			console.log("isIOS:");
+			console.log(that.isIOS);
 			
 			winston.log('info', currentCapabilities.caps_);
 			winston.log('info', that.deviceOrientation);

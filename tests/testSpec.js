@@ -11,8 +11,9 @@ describe('Desktop Browser Testing', function() {
 	browser.sleep(1000);
 
 
-    /*afterEach(function() {
-		if (!testPage.isIE) {
+    afterEach(function() {
+		//Doesn't work on ios or IE
+		if (!testPage.isIE && !testPage.isIOS) {
             var realErrors = [];
             browser.manage().logs().get('browser').then(function(browserLog) {
                 if (browserLog.length !== 0) {
@@ -25,11 +26,10 @@ describe('Desktop Browser Testing', function() {
                     }
                 }
                 if (realErrors.length !== 0) console.log('log: ' + require('util').inspect(realErrors));
-				//TODO: Add this back in
-                //expect(realErrors.length).toEqual(0);
+                expect(realErrors.length).toEqual(0);
             });
 		}
-    });*/
+    });
 
 	it('Should wait for the original page to load', function() {
 		expect(browser.sleep(10000)).toBe();
