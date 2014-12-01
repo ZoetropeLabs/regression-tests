@@ -76,6 +76,30 @@ describe('Desktop Browser Testing', function() {
 		expect(testPage.comparePageImages('zoomClose')).toBeLessThan(imageComparisonThreshold);
 	});
 
+	it('Should teardown the zoetrope when unZoetrope is called', function() {
+		testPage.unzoetrope();
+		browser.wait(function() {
+			var deferred = new protractor.promise.Deferred();
+			element(by.css(testPage.elements.widgetWrapperSelector)).isPresent()
+			.then(function(isPresent) {
+				deferred.fulfill(!isPresent);
+			});
+			return deferred.promise;
+		}, testPage.settings.unzoetropeTimeout);
+		expect(testPage.comparePageImages('unzoetrope')).toBeLessThan(imageComparisonThreshold);
+	});
+
+	it('Should save image from loaded inline page with trigger size', function() {
+		testPage.navigate('inline').then(function() {
+			testPage.getDeviceOrientation().then(function() {
+				testPage.resizeZoeContainer(300);
+				browser.sleep(10000);
+				expect(testPage.comparePageImages('load-trigger-size')).toBeLessThan(imageComparisonThreshold);
+			});
+		});
+	});
+
+
 
 //POPOVER TESTING
 
@@ -132,4 +156,17 @@ describe('Desktop Browser Testing', function() {
 		expect(testPage.comparePageImages('zoomClose')).toBeLessThan(imageComparisonThreshold);
 	});
 
+	/* Leave this until the lightbox is fixed
+	 * it('Should teardown the zoetrope when unZoetrope is called', function() {
+		testPage.unzoetrope();
+		browser.wait(function() {
+			var deferred = new protractor.promise.Deferred();
+			element(by.css(testPage.elements.widgetWrapperSelector)).isPresent()
+			.then(function(isPresent) {
+				deferred.fulfill(!isPresent);
+			});
+			return deferred.promise;
+		}, testPage.settings.unzoetropeTimeout);
+		expect(testPage.comparePageImages('unzoetrope')).toBeLessThan(imageComparisonThreshold);
+	});*/
 });

@@ -50,7 +50,31 @@ describe ('Build Screenshot Images', function() {
 		expect(testPage.savePageScreenshot('zoomClose')).toBe();
 
 	});
+
+
+	it('Should teardown the zoetrope when unZoetrope is called', function() {
+		testPage.unzoetrope();
+		browser.wait(function() {
+			var deferred = new protractor.promise.Deferred();
+			element(by.css(testPage.elements.widgetWrapperSelector)).isPresent()
+			.then(function(isPresent) {
+				deferred.fulfill(!isPresent);
+			});
+			return deferred.promise;
+		}, testPage.settings.unzoetropeTimeout);
+		expect(testPage.savePageScreenshot('unzoetrope')).toBe();
+	});
 	
+	it('Should save image from loaded inline page with trigger size', function() {
+		testPage.navigate('inline').then(function() {
+			testPage.getDeviceOrientation().then(function() {
+				testPage.resizeZoeContainer(300);
+				browser.sleep(10000);
+				expect(testPage.savePageScreenshot('load-trigger-size')).toBe();
+			});
+		});
+	});
+
 	it('Should save image from loaded page', function() {
 		testPage.navigate('popover').then(function() {
 			testPage.getDeviceOrientation().then(function() {
@@ -98,6 +122,20 @@ describe ('Build Screenshot Images', function() {
 		expect(testPage.savePageScreenshot('zoomClose')).toBe();
 
 	});
+
+	/* Leave this until the lightbox is fixed
+	 * it('Should teardown the zoetrope when unZoetrope is called', function() {
+		testPage.unzoetrope();
+		browser.wait(function() {
+			var deferred = new protractor.promise.Deferred();
+			element(by.css(testPage.elements.widgetWrapperSelector)).isPresent()
+			.then(function(isPresent) {
+				deferred.fulfill(!isPresent);
+			});
+			return deferred.promise;
+		}, testPage.settings.unzoetropeTimeout);
+		expect(testPage.savePageScreenshot('unzoetrope')).toBe();
+	});*/
 
 
 });

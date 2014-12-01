@@ -66,15 +66,18 @@ var testPage =  function () {
 		zoomTimeout : 1000,
 		firefoxDragTimeout: 10000,
 		s3BaseURL : "https://s3-eu-west-1.amazonaws.com/zoetrope-alpha/",
+		unzoetropeTimeout : 10000,
 	};
 
 	this.testImagePaths= {
 		'load' : 'images/load-',
+		'load-trigger-size' : 'images/load-trigger-size-',
 		'help' : 'images/help-',
 		'helpClose' : 'images/helpClose-',
 		'zoom' : 'images/zoom-',
 		'zoomClose' : 'images/zoomClose-',
-		'openWidget' : 'images/openWidget-'
+		'openWidget' : 'images/openWidget-',
+		'unzoetrope' : 'images/unzoetrope-'
 	};
 
 	this.testImages = {};
@@ -271,7 +274,6 @@ var testPage =  function () {
 				element(by.css(that.elements.progressWrapper)).isPresent()
 				.then(function (isPresent) {
 					deferred.fulfill(isPresent);
-					console.log("Present fulfilled");
 				});
 				return deferred.promise;
 			}, that.settings.pageLoadTimeout);
@@ -486,6 +488,15 @@ var testPage =  function () {
 
 	var scrollIntoView = function() {
 		arguments[0].scrollIntoView();
+	};
+
+
+	this.unzoetrope = function() {
+		browser.executeScript("$('.zoe-engage-wrapper').unZoetrope()");
+	};
+	
+	this.resizeZoeContainer = function(size) {
+		browser.executeScript("$(arguments[0]).width(arguments[1]); $(arguments[0]).height(arguments[1]);", '.zoe-engage-wrapper', size);
 	};
 
 
